@@ -1,0 +1,145 @@
+@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600&family=Inter:wght@400;500;600&display=swap');
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --bg: #0e0f11;
+  --surface: #16181c;
+  --border: #2a2d33;
+  --text: #e8eaf0;
+  --text-muted: #6b7280;
+  --accent: #22d3a5;
+  --accent-dim: rgba(34, 211, 165, 0.12);
+  --danger: #f87171;
+  --radius: 10px;
+}
+
+body {
+  width: 320px;
+  font-family: 'Inter', sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  font-size: 13px;
+  line-height: 1.5;
+}
+
+.popup { padding: 14px; display: flex; flex-direction: column; gap: 12px; }
+
+/* Header */
+.popup__header {
+  display: flex; align-items: center; justify-content: space-between;
+}
+.popup__logo { display: flex; align-items: center; gap: 8px; }
+.popup__title { font-size: 14px; font-weight: 500; letter-spacing: -0.01em; }
+.popup__title strong { color: var(--accent); font-weight: 700; }
+.popup__version {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  color: var(--text-muted);
+  background: var(--surface);
+  border: 1px solid var(--border);
+  padding: 2px 6px;
+  border-radius: 4px;
+}
+
+/* Status banner */
+.popup__status {
+  display: flex; align-items: center; gap: 8px;
+  padding: 8px 12px;
+  border-radius: var(--radius);
+  font-size: 12px;
+  font-weight: 500;
+  border: 1px solid transparent;
+}
+.popup__status--active {
+  background: var(--accent-dim);
+  border-color: rgba(34, 211, 165, 0.25);
+  color: var(--accent);
+}
+.popup__status--inactive {
+  background: var(--surface);
+  border-color: var(--border);
+  color: var(--text-muted);
+}
+.popup__status-dot {
+  width: 7px; height: 7px;
+  border-radius: 50%;
+  background: currentColor;
+  flex-shrink: 0;
+}
+.popup__status--active .popup__status-dot {
+  box-shadow: 0 0 6px var(--accent);
+  animation: pulse 2s infinite;
+}
+@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.4; }
+}
+
+/* Toggles */
+.popup__toggles {
+  display: flex; flex-direction: column;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  overflow: hidden;
+}
+.toggle {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 10px 12px;
+  cursor: pointer;
+  transition: background 0.15s;
+  gap: 10px;
+}
+.toggle + .toggle { border-top: 1px solid var(--border); }
+.toggle:hover { background: rgba(255,255,255,0.03); }
+.toggle__info { flex: 1; min-width: 0; }
+.toggle__label { display: block; font-weight: 500; font-size: 12.5px; }
+.toggle__desc { display: block; font-size: 11px; color: var(--text-muted); margin-top: 1px; }
+.toggle__switch { position: relative; flex-shrink: 0; }
+.toggle__input { position: absolute; opacity: 0; width: 0; height: 0; }
+.toggle__slider {
+  display: block; width: 36px; height: 20px;
+  background: var(--border);
+  border-radius: 10px;
+  transition: background 0.2s;
+  position: relative;
+}
+.toggle__slider::after {
+  content: '';
+  position: absolute;
+  top: 2px; left: 2px;
+  width: 16px; height: 16px;
+  background: #fff;
+  border-radius: 50%;
+  transition: transform 0.2s;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.4);
+}
+.toggle__input:checked ~ .toggle__slider { background: var(--accent); }
+.toggle__input:checked ~ .toggle__slider::after { transform: translateX(16px); }
+
+/* Actions */
+.popup__btn {
+  width: 100%; padding: 9px;
+  border: none; border-radius: var(--radius);
+  font-family: inherit; font-size: 12.5px; font-weight: 600;
+  cursor: pointer; transition: all 0.15s;
+}
+.popup__btn--primary {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  color: var(--text);
+}
+.popup__btn--primary:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+  background: var(--accent-dim);
+}
+
+/* Footer */
+.popup__footer {
+  display: flex; justify-content: center; align-items: center;
+  gap: 6px; font-size: 11px; color: var(--text-muted);
+}
+.popup__footer a { color: var(--text-muted); text-decoration: none; }
+.popup__footer a:hover { color: var(--accent); }

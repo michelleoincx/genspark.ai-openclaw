@@ -1,0 +1,64 @@
+{
+  "manifest_version": 3,
+  "name": "GenSpark OpenClaw",
+  "version": "1.0.0",
+  "description": "Open-source extension that unlocks full access to genspark.ai — no limits, no paywalls, no walls.",
+  "homepage_url": "https://github.com/openclaw/genspark.ai-openclaw",
+
+  "icons": {
+    "16": "icons/icon16.png",
+    "32": "icons/icon32.png",
+    "48": "icons/icon48.png",
+    "128": "icons/icon128.png"
+  },
+
+  "action": {
+    "default_popup": "popup.html",
+    "default_icon": {
+      "16": "icons/icon16.png",
+      "32": "icons/icon32.png",
+      "48": "icons/icon48.png"
+    },
+    "default_title": "GenSpark OpenClaw"
+  },
+
+  "background": {
+    "service_worker": "background.js",
+    "type": "module"
+  },
+
+  "content_scripts": [
+    {
+      "matches": ["*://*.genspark.ai/*"],
+      "js": ["content.js"],
+      "css": [],
+      "run_at": "document_start",
+      "all_frames": false
+    }
+  ],
+
+  "permissions": [
+    "storage",
+    "tabs",
+    "cookies",
+    "webRequest",
+    "scripting",
+    "notifications"
+  ],
+
+  "host_permissions": [
+    "*://*.genspark.ai/*",
+    "*://api.genspark.ai/*"
+  ],
+
+  "web_accessible_resources": [
+    {
+      "resources": ["icons/*"],
+      "matches": ["*://*.genspark.ai/*"]
+    }
+  ],
+
+  "content_security_policy": {
+    "extension_pages": "script-src 'self'; object-src 'self'"
+  }
+}
